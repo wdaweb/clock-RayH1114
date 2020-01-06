@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>clock</title>
+        <style>
+        body{
+            background: linear-gradient(to top, #2d343d,  #251f3b); 
+        width:98vw;
+        height:97vh;
+        position: relative;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        }
+
+        #showTime{
+        padding-top:20px ;
+         text-align: center;
+         font-family: "微軟正黑體",Arial, Helvetica, sans-serif;
+         font-size: 18px;
+         color: rgb(255, 255, 255);
+         
+        }
+
+        #clock{
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            position: relative;
+            background: linear-gradient(to bottom , #0a040ea9,  #251f3b); 
+            filter: drop-shadow(5px 5px 5px  rgba(47, 58, 70, 0.2));
+        }
+
+        #second{
+            width: 50%;
+            height: 6px;
+            position: absolute;
+            top: calc(50% - 3px);
+            transform: rotate(90deg);
+            transform-origin: right center;
+            border-radius: 3px;
+        }
+        #second::after{
+            content: "";
+            position: relative;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom,  #eb065e,  #ce0250); 
+            position: absolute;
+            left: -30px;
+            filter: drop-shadow(3px 3px 3px  rgba(44, 55, 66, 0.2));
+  
+        }
+        #minute{
+            width: 45%;
+            height: 1.5px;
+            background: linear-gradient(to bottom, #eb065e,  #ce0250); 
+            position: absolute;
+            top: calc(50% - 0px);
+            transform: rotate(90deg);
+            transform-origin: right center;
+            border-radius: 3px;
+            left: 4%;
+        }
+        #minute::after{
+            content: "";
+            width: 60px;
+            height: 1.5px;
+            background: linear-gradient(to bottom, #eb065e,  #ce0250); 
+            position: absolute;
+            left: 150px;
+        }
+        #minute::before{
+            content: "";
+            position: relative;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #eb065e,  #ce0250); 
+            position: absolute;
+            left:  205px;
+            bottom: -4px;
+            filter: drop-shadow(3px 3px 3px  rgba(44, 55, 66, 0.2));
+            z-index: 1;
+        }
+        #hour{
+            width: 30%;
+            height: 4px;
+            background-color: rgb(255, 255, 255);
+            position: absolute;
+            top: calc(50% - 2px);
+            transform: rotate(90deg);
+            transform-origin: right center;
+            border-radius: 3px;
+            left: 20%;
+        }
+        #hour::before{
+            content: "";
+            position: relative;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #797878,  #8b8b8b); 
+            position: absolute;
+            left:  95px;
+            bottom: -10px;
+            filter: drop-shadow(3px 3px 3px  rgba(44, 55, 66, 0.2));
+            z-index: 1;
+        }
+
+
+
+    </style>
+</head>
+<body>   
+    <div>
+        <div id="clock">
+            <div id="minute"></div>
+            <div id="second"></div>
+            <div id="hour"></div>
+        </div>
+        <p id="showTime">現在時間: <span id="time"></span></p>
+  </div>
+    <script>
+        let hour = document.getElementById("hour");
+        let minute = document.getElementById("minute");
+        let second = document.getElementById("second");
+
+        setInterval(() => {
+            let date = new Date();
+            let h = date.getHours();
+            let m = date.getMinutes();
+            let s = date.getSeconds();
+            // console.log(h+":"+m+":"+s);
+            hour.style.transform = `rotate( ${h*30+90}deg)`;
+            minute.style.transform = `rotate( ${m*6+90}deg)`;
+            second.style.transform = `rotate( ${s*6+90}deg)`;
+
+            let y = date.getFullYear();
+            let mon = date.getMonth();
+            let d = date.getDate();
+            time.innerText  = date.toLocaleString("zh-tw");
+        }, 1000);
+
+    </script>
+</body>
+</html>
